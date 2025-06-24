@@ -1,0 +1,3 @@
+crewai
+ollama
+duckduckgo-search
