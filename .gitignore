@@ -72,10 +72,11 @@ yarn.lock
 .ipynb_checkpoints
 
 auth_info_listener/
+
 crewAI-tools/
 messages.json
 sample.py
-.env
+
 node_modules/
-venv/
+
 
