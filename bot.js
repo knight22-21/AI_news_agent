@@ -28,7 +28,7 @@ async function startListener() {
 
     if (connection === 'close') {
       console.log('🔄 Connection closed. Reconnecting...');
-      startListener(); // Restart listener
+      startListener();
     } else if (connection === 'open') {
       console.log('✅ Bot is connected and ready!');
     }
@@ -59,7 +59,6 @@ async function startListener() {
       const metadata = await sock.groupMetadata(jid);
       const sender = msg.key.participant || msg.key.remoteJid;
 
-      // Allow bot itself (QR scanner) to issue the command
       const botJid = sock.user?.id;
       const isFromBot = sender === botJid;
 
@@ -82,6 +81,8 @@ async function startListener() {
         if (data.success) {
           const summary = data.summary.raw || data.summary || JSON.stringify(data, null, 2);
           const summaryText = typeof summary === 'string' ? summary : JSON.stringify(summary, null, 2);
+          
+          // WhatsApp message limit is around 4096 characters. Use 3000 for safety.
           const chunks = summaryText.match(/[\s\S]{1,3000}/g) || [];
 
           for (const chunk of chunks) {
