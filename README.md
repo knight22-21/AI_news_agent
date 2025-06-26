@@ -1,5 +1,5 @@
 
-## AI News WhatsApp Bot
+## AI News WhatsApp Agent
 
 This project fetches the latest AI-related news (LLMs, RAG, AI agents) using the NewsAPI and sends a summarized version directly to a WhatsApp group using the Baileys library.
 
