@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from main1 import crew  # Import your existing Crew instance from crew_setup.py
+from main1 import crew  
 
 app = FastAPI()
 
