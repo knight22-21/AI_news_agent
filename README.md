@@ -1,6 +1,3 @@
-Sure! Here's a clean and simple **README.md** file for your project:
-
----
 
 ## AI News WhatsApp Bot
 
