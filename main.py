@@ -1,6 +1,11 @@
 import os
 from dotenv import load_dotenv
 
+import subprocess
+import shlex
+import json
+import sys
+
 load_dotenv()
 
 from crewai import Agent, Task, Crew, Process, LLM
@@ -102,4 +107,35 @@ crew = Crew(
     process=Process.sequential,  
     verbose=True,
 )
+
+
+
+
+
+if __name__ == "__main__":
+    print("🔍 Running AI News Crew pipeline...")
+    result = crew.kickoff()
+    summary = result.raw if hasattr(result, "raw") else str(result)
+
+    try:
+        with open("messages.json", "r", encoding="utf-8") as f:
+            group_data = json.load(f)
+            if not group_data or not group_data[0].get("groupId"):
+                raise ValueError("messages.json is missing a valid groupId.")
+            group_id = group_data[0]["groupId"]
+    except Exception as e:
+        print("Failed to read groupId from messages.json:", e)
+        sys.exit(1)
+
+    try:
+        process = subprocess.Popen(
+            ["node", "bot.js", "send", group_id],
+            stdin=subprocess.PIPE,
+            text=True
+        )
+        process.communicate(input=summary)
+    except Exception as e:
+        print("Failed to send summary to WhatsApp:", e)
+        sys.exit(1)
+
 
