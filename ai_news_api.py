@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from main1 import crew  
+from main import crew  
 
 app = FastAPI()
 

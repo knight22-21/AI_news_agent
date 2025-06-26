@@ -7,7 +7,7 @@ from crewai import Agent, Task, Crew, Process, LLM
 from crewai.tools import tool
 from newsapi import NewsApiClient
 
-newsapi = NewsApiClient(api_key=os.getenv("NEWS_API_KEY"))  # Use env variable for key
+newsapi = NewsApiClient(api_key=os.getenv("NEWS_API_KEY"))  
 
 @tool
 def fetch_ai_news():
